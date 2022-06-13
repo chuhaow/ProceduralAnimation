@@ -26,7 +26,7 @@ public class CreatureController : MonoBehaviour
 
     private void move()
     {
-        velocity = Vector3.MoveTowards(velocity, new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized,1f);
+        velocity = Vector3.MoveTowards(velocity, new Vector3(Input.GetAxis("Vertical"), 0f, Input.GetAxis("Horizontal")).normalized,1f);
         transform.position += velocity * speed * Time.deltaTime;
     }
 }
