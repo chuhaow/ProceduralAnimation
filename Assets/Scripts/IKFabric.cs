@@ -12,6 +12,9 @@ public class IKFabric : MonoBehaviour
     [SerializeField] private int iterations;
     [SerializeField] private float delta;
 
+    [Range(0,1)]
+    [SerializeField] private float snapBackStrength;
+
     protected float[] bonesLength;
     protected float completeLength;
     protected Transform[] bones;
@@ -101,6 +104,10 @@ public class IKFabric : MonoBehaviour
         }
         else
         {
+            for(int i = 0; i < positions.Length-1; i++)
+            {
+                positions[i + 1] = Vector3.Lerp(positions[i + 1], positions[i] + startDirSucc[i], snapBackStrength);
+            }
             for(int iter = 0; iter < iterations && !isLastCloseEnough; iter++)
             {
                 //adjust backward
