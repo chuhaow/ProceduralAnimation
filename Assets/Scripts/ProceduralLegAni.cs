@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class ProceduralLegAni : MonoBehaviour
 {
+    public LayerMask groundLayer;
     [SerializeField] private Transform ikTarget;
     [SerializeField] private Transform ikPole;
     [SerializeField] private Vector3 worldTarget = Vector3.zero;
     [SerializeField] public Vector3 restingPosition = Vector3.forward;
     [SerializeField] private Vector3 worldVelocity = Vector3.right;
-    [SerializeField] private Vector3 temp;
+
+    [SerializeField] private Vector3 offset;
 
     [Header("Step Modifier")]
     [SerializeField] private float stepHeight;
     [SerializeField] private float stepDur;
+    [SerializeField] private float stepOffset;
     [SerializeField] private AnimationCurve stepHeightCurve;
     [SerializeField] private float lastStep = 0;
-    [SerializeField] private float stepCoolDown = 0.1f;
+    [SerializeField] private float stepCoolDown = 0.01f;
 
     public Vector3 worldRestingPos //transform to world space
     {
         get
         {
-            return transform.TransformPoint(restingPosition) - Vector3.up;
+            return transform.TransformPoint(restingPosition) + offset;
         }
     }
 
@@ -30,7 +33,31 @@ public class ProceduralLegAni : MonoBehaviour
     {
         get
         {
-            return restingPosition + worldVelocity ;
+            return worldRestingPos + worldVelocity ;
+        }
+    }
+
+    public float StepDur
+    {
+        set
+        {
+            stepDur = value;
+        }
+    }
+
+    public Vector3 WorldVelocity
+    {
+        set
+        {
+            worldVelocity = value;
+        }
+    }
+
+    public float LastStep
+    {
+        set
+        {
+            lastStep = value;
         }
     }
 
@@ -38,8 +65,8 @@ public class ProceduralLegAni : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         worldVelocity = Vector3.zero;
+        lastStep = Time.time + stepCoolDown * stepOffset;
         Step();
     }
 
@@ -47,7 +74,7 @@ public class ProceduralLegAni : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        temp = destinationPosition;
+
         UpdateIKTarget();
         if(Time.time > lastStep + stepCoolDown)
         {
@@ -57,21 +84,24 @@ public class ProceduralLegAni : MonoBehaviour
 
     private void UpdateIKTarget()
     {
-        ikTarget.position = Vector3.Lerp(ikTarget.position, worldTarget, Time.deltaTime) + Vector3.up * stepHeightCurve.Evaluate(Time.deltaTime) * stepHeight;
+        float percent = Mathf.Clamp01((Time.time - lastStep) / stepDur);
+        ikTarget.position = Vector3.Lerp(ikTarget.position, worldTarget, percent) + Vector3.up * stepHeightCurve.Evaluate(percent) * stepHeight;
     }
 
-    private void Step()
+    public void Step()
     {
         Vector3 dir = destinationPosition - ikPole.position;
         RaycastHit hit;
-        if(Physics.Raycast (ikPole.position,dir,out hit, dir.magnitude * 2f))
+        if(Physics.Raycast (ikPole.position,dir,out hit, dir.magnitude))
         {
+            
             worldTarget = hit.point;
         }
         else
         {
+           
+
             worldTarget = worldRestingPos;
-            Debug.LogError("HERE");
         }
         lastStep = Time.time;
     }
@@ -86,6 +116,5 @@ public class ProceduralLegAni : MonoBehaviour
         Gizmos.DrawWireSphere(destinationPosition, 0.2f);
         Gizmos.color = Color.green;
         Gizmos.DrawLine(ikPole.position, destinationPosition);
-
     }
 }
