@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ProceduralLegAni : MonoBehaviour
 {
-    public LayerMask groundLayer;
+    [SerializeField] private LayerMask solidLayer;
     [SerializeField] private Transform ikTarget;
     [SerializeField] private Transform ikPole;
     [SerializeField] private Vector3 worldTarget = Vector3.zero;
@@ -92,7 +92,7 @@ public class ProceduralLegAni : MonoBehaviour
     {
         Vector3 dir = destinationPosition - ikPole.position;
         RaycastHit hit;
-        if(Physics.Raycast (ikPole.position,dir,out hit, dir.magnitude))
+        if(Physics.Raycast (ikPole.position,dir,out hit, dir.magnitude, solidLayer))
         {
             
             worldTarget = hit.point;
