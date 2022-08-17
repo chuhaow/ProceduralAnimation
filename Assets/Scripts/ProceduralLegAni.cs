@@ -12,6 +12,7 @@ public class ProceduralLegAni : MonoBehaviour
     [SerializeField] private Vector3 worldVelocity = Vector3.right;
 
     [SerializeField] private Vector3 offset;
+    [SerializeField] private Vector3 desPos;
 
     [Header("Step Modifier")]
     [SerializeField] private float stepHeight;
@@ -34,6 +35,14 @@ public class ProceduralLegAni : MonoBehaviour
         get
         {
             return worldRestingPos + worldVelocity ;
+        }
+    }
+
+    public float percent
+    {
+        get
+        {
+            return Mathf.Clamp01((Time.time - lastStep) / stepDur);
         }
     }
 
@@ -68,6 +77,7 @@ public class ProceduralLegAni : MonoBehaviour
         worldVelocity = Vector3.zero;
         lastStep = Time.time + stepCoolDown * stepOffset;
         Step();
+        desPos = destinationPosition;
     }
 
 
@@ -80,6 +90,7 @@ public class ProceduralLegAni : MonoBehaviour
         {
             Step();
         }
+        desPos = destinationPosition;
     }
 
     private void UpdateIKTarget()
@@ -90,20 +101,23 @@ public class ProceduralLegAni : MonoBehaviour
 
     public void Step()
     {
+        
         Vector3 dir = destinationPosition - ikPole.position;
         RaycastHit hit;
-        if(Physics.Raycast (ikPole.position,dir,out hit, dir.magnitude, solidLayer))
+        if(Physics.Raycast (ikPole.position,dir,out hit, dir.magnitude*2f, solidLayer))
         {
-            
             worldTarget = hit.point;
         }
         else
         {
-           
-
             worldTarget = worldRestingPos;
         }
         lastStep = Time.time;
+    }
+
+    public void MoveVelocity(Vector3 newVelocity)
+    {
+        worldVelocity = Vector3.Lerp(worldVelocity, newVelocity, 1f - percent);
     }
 
     public void OnDrawGizmos()
@@ -117,4 +131,6 @@ public class ProceduralLegAni : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawLine(ikPole.position, destinationPosition);
     }
+
+
 }

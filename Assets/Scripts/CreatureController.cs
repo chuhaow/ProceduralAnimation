@@ -48,11 +48,23 @@ public class CreatureController : MonoBehaviour
             {
                 return ;
             }
+            for (int i = 0; i < legs.Length; i++)
+            {
+                legs[i].MoveVelocity(CalculateLegVelocity(i));
+            }
             legs[index].StepDur = Mathf.Min(0.5f, timeBetweenSteps / 2f);
-            legs[index].WorldVelocity = velocity*0.1f;
+            legs[index].WorldVelocity = velocity;
             legs[index].Step();
-            legs[index].LastStep = Time.time;
+            lastStep = Time.time;
             index = (index + 1) % legs.Length;
         }
+    }
+
+    public Vector3 CalculateLegVelocity(int legIndex)
+    {
+        Vector3 legPoint = (legs[legIndex].restingPosition);
+        Vector3 legDirection = legPoint - transform.position;
+        Vector3 rotationalPoint = ((Quaternion.AngleAxis((rotationSpeed * timeBetweenSteps) / 2f, transform.up) * legDirection) + transform.position) - legPoint;
+        return rotationalPoint + ((velocity* speed) * timeBetweenSteps) / 2f;
     }
 }
