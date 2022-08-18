@@ -1821,6 +1821,12 @@ MonoBehaviour:
   ikPole: {fileID: 1941971854}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
   worldPosition: {x: 0, y: 0, z: 0}
+  desiredPoint: {fileID: 1018479892}
+  strideLength: 2
+  solidLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  desired: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2552,7 @@ GameObject:
   - component: {fileID: 1018479890}
   - component: {fileID: 1018479889}
   m_Layer: 0
-  m_Name: Sphere (2)
+  m_Name: DesiredPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2622,8 +2628,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018479888}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 2.1000018, y: -13.099998, z: 12.869998}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 2.1000018, y: -13.099998, z: 14.63}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 1563697270}
   m_RootOrder: 4
@@ -3657,7 +3663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480875056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.29, y: 1.57, z: -0.92}
+  m_LocalPosition: {x: 8.29, y: 2.45, z: -0.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 809708345}
