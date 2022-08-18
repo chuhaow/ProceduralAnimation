@@ -13,6 +13,7 @@ public class ProceduralLeg : MonoBehaviour
     [SerializeField] private LayerMask solidLayer;
     [SerializeField] private Vector3 desired;
     [SerializeField] private float stepPercentage;
+    private float dist;
     private bool isStepping = false;
 
     [Header("Step Modifier")]
@@ -30,6 +31,14 @@ public class ProceduralLeg : MonoBehaviour
         }
     }
 
+    public bool CanStep
+    {
+        get
+        {
+            return dist >= strideLength;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,10 +49,10 @@ public class ProceduralLeg : MonoBehaviour
     void Update()
     {
         desired = desiredPoint.position;
-        float dist = Vector3.Distance(ikTarget.position, desiredPoint.position);
-        if(dist >= strideLength || isStepping)
+        dist = Vector3.Distance(ikTarget.position, desiredPoint.position);
+        if(isStepping)
         {
-            isStepping = true;
+            
             Step();
             Debug.Log("We are Stepping");
         }
@@ -74,8 +83,9 @@ public class ProceduralLeg : MonoBehaviour
         }
     }
 
-    private void Step()
+    public void Step()
     {
+        isStepping = true;
         worldPosition = desiredPoint.position;
         stepPercentage += Time.deltaTime;
         ikTarget.position = Vector3.Lerp(ikTarget.position, worldPosition, percent) + Vector3.up * stepHeightCurve.Evaluate(percent) * stepHeight;
