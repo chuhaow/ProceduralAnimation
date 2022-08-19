@@ -39,6 +39,22 @@ public class ProceduralLeg : MonoBehaviour
         }
     }
 
+    public bool isInStep
+    {
+        get
+        {
+            return isStepping;
+        }
+    }
+
+    public Vector3 footPosition
+    {
+        get
+        {
+            return ikTarget.position;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +83,7 @@ public class ProceduralLeg : MonoBehaviour
     
     private void UpdateIKTarget()
     {
+        worldPosition.y = desiredPoint.position.y;
         ikTarget.position = Vector3.Lerp(ikTarget.position, worldPosition, 1f);
     }
 
