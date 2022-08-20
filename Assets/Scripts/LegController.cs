@@ -82,6 +82,7 @@ public class LegController : MonoBehaviour
 
     private void CalulateAllTriangleNormal()
     {
+        norm = Vector3.zero;
         if(legs.Length <= 2)
         {
             return;
@@ -91,11 +92,11 @@ public class LegController : MonoBehaviour
 
             if (tri.Length == 3)
             {
-                norm = (Vector3.Cross(legs[tri[1]].footPosition - legs[tri[0]].footPosition, legs[tri[2]].footPosition - legs[tri[0]].footPosition)).normalized;
+                norm += (Vector3.Cross(legs[tri[1]].footPosition - legs[tri[0]].footPosition, legs[tri[2]].footPosition - legs[tri[0]].footPosition)).normalized;
             }
 
         }
-
+        norm /= triangles.Count;
     }
 
     private float det3D(Vector3 p0, Vector3 p1, Vector3 p2)
