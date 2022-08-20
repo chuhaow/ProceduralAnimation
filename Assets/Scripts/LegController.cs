@@ -5,17 +5,20 @@ using UnityEngine;
 public class LegController : MonoBehaviour
 {
     private float lastStep;
-
+    private List<int[]> triangles = new List<int[]>();
     [SerializeField] private float startHeight;
     [SerializeField] private float minHeight;
     [SerializeField] private float maxHeight;
     [SerializeField] private float currtHeight;
+    [SerializeField] private Vector3 norm;
+    [SerializeField] private Transform body;
     [Header("Legs")]
     [SerializeField] private ProceduralLeg[] legs;
     // Start is called before the first frame update
     void Start()
     {
         startHeight = Mathf.Abs(transform.position.y - AvgFootYPosition());
+        FindAllTriangles();
         Debug.Log(AvgFootYPosition());
 
     }
@@ -25,7 +28,8 @@ public class LegController : MonoBehaviour
     {
         MoveLegs();
         positionBody();
-
+        CalulateAllTriangleNormal();
+        body.up = norm;
     }
 
     private void positionBody()
@@ -78,31 +82,47 @@ public class LegController : MonoBehaviour
 
     private void CalulateAllTriangleNormal()
     {
+        if(legs.Length <= 2)
+        {
+            return;
+        }
+        foreach (int[] tri in triangles)
+        {
+
+            if (tri.Length == 3)
+            {
+                norm = (Vector3.Cross(legs[tri[1]].footPosition - legs[tri[0]].footPosition, legs[tri[2]].footPosition - legs[tri[0]].footPosition)).normalized;
+            }
+
+        }
 
     }
 
-    private float CalulateLeftRightLegDiff()
+    private float det3D(Vector3 p0, Vector3 p1, Vector3 p2)
     {
-        Vector3 rightAvg = new Vector3();
-        Vector3 leftAvg = new Vector3(); 
-        for (int legIndex = 0; legIndex < legs.Length; legIndex++)
+        
+        float det = p0.x * ((p1.y * p2.z) - (p2.y * p1.z)) -
+              p1.x * ((p0.y * p2.z) - (p2.y * p0.z)) +
+              p2.x * ((p0.y * p1.z) - (p1.y * p0.z));
+        return det;
+    }
+
+    //Find all possible triangles formed by foot position
+    private void FindAllTriangles()
+    {
+        for(int i = 0; i < legs.Length; i++)
         {
-            if (legs[legIndex] != null)
+            for(int j = i+1; j < legs.Length; j++)
             {
-                if(legs[legIndex].footPosition.x > transform.position.x) // right leg
+                for(int k = j + 1; k < legs.Length; k++)
                 {
-                    rightAvg += legs[legIndex].footPosition;
-                }
-                else // left leg
-                {
-                    leftAvg += legs[legIndex].footPosition;
+                    if(det3D(legs[i].footPosition, legs[j].footPosition, legs[k].footPosition) != 0)
+                    {
+                        triangles.Add(new int[]{ i, j, k });
+                    }
                 }
             }
         }
-        rightAvg /= legs.Length;
-        leftAvg /= legs.Length;
-        
-        return Vector3.Angle(rightAvg, leftAvg);
     }
 
 }

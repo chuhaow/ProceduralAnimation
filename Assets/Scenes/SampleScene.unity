@@ -620,7 +620,7 @@ MonoBehaviour:
     m_Bits: 256
   desired: {x: 0, y: 0, z: 0}
   stepPercentage: 0
-  stepHeight: 0.5
+  stepHeight: 0.2
   stepDur: 0.5
   stepOffset: 0
   stepHeightCurve:
@@ -1103,7 +1103,7 @@ BoxCollider:
   m_GameObject: {fileID: 329759381}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1875,7 +1875,7 @@ MonoBehaviour:
     m_Bits: 256
   desired: {x: 0, y: 0, z: 0}
   stepPercentage: 0
-  stepHeight: 0.5
+  stepHeight: 0.2
   stepDur: 0.5
   stepOffset: 0
   stepHeightCurve:
@@ -2393,7 +2393,7 @@ MonoBehaviour:
     m_Bits: 256
   desired: {x: 0, y: 0, z: 0}
   stepPercentage: 0
-  stepHeight: 0.5
+  stepHeight: 0.2
   stepDur: 0.5
   stepOffset: 0
   stepHeightCurve:
@@ -2456,15 +2456,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.86602545
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.49999994
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_RootOrder
@@ -2476,7 +2476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 120
+      value: 240
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -5920,6 +5920,8 @@ MonoBehaviour:
   minHeight: 1
   maxHeight: 2
   currtHeight: 0
+  norm: {x: 0, y: 0, z: 0}
+  body: {fileID: 1600094257}
   legs:
   - {fileID: 1231535211}
   - {fileID: 317266410}
@@ -6027,6 +6029,8 @@ MonoBehaviour:
   minHeight: 1
   maxHeight: 2
   currtHeight: 0
+  norm: {x: 0, y: 0, z: 0}
+  body: {fileID: 295115900}
   legs:
   - {fileID: 1707598573}
   - {fileID: 494279592}
@@ -6399,7 +6403,7 @@ SphereCollider:
   m_GameObject: {fileID: 1600094256}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -6531,7 +6535,7 @@ MonoBehaviour:
     m_Bits: 256
   desired: {x: 0, y: 0, z: 0}
   stepPercentage: 0
-  stepHeight: 0.5
+  stepHeight: 0.2
   stepDur: 0.5
   stepOffset: 0
   stepHeightCurve:
@@ -7509,15 +7513,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.8660254
+      value: 0.86602545
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.5
+      value: 0.49999994
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_RootOrder
@@ -7529,7 +7533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 240
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -8374,7 +8378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2111995311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8391,6 +8395,8 @@ MonoBehaviour:
   minHeight: 0.5
   maxHeight: 2
   currtHeight: 0
+  norm: {x: 0, y: 0, z: 0}
+  body: {fileID: 0}
   legs:
   - {fileID: 1476585161}
   - {fileID: 944628346}
