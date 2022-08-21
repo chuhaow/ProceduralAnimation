@@ -10,8 +10,10 @@ public class LegController : MonoBehaviour
     [SerializeField] private float minHeight;
     [SerializeField] private float maxHeight;
     [SerializeField] private float currtHeight;
-    [SerializeField] private Vector3 norm;
+    [SerializeField] private Vector3 norm1;
+    [SerializeField] private Vector3 fake;
     [SerializeField] private Transform body;
+    [SerializeField] private float offset;
     [Header("Legs")]
     [SerializeField] private ProceduralLeg[] legs;
     // Start is called before the first frame update
@@ -28,9 +30,10 @@ public class LegController : MonoBehaviour
     {
         MoveLegs();
         positionBody();
-        CalulateAllTriangleNormal();
-        body.up = norm;
+
     }
+
+   
 
     private void positionBody()
     {
@@ -44,6 +47,13 @@ public class LegController : MonoBehaviour
         {
             Vector3 desiredBodyPosition = new Vector3(transform.position.x, transform.position.y - Mathf.Abs(startHeight - currHeight), transform.position.z);
             transform.position = Vector3.Lerp(transform.position, desiredBodyPosition, Time.deltaTime*2);
+        }
+        if (isStationary())
+        {
+            Vector3 norm = CalulateAllTriangleNormal();
+            norm1 = norm;
+            Debug.DrawRay(body.position, norm * 2, Color.red);
+            body.up = Vector3.Lerp(body.up,norm, Time.deltaTime * 2);
         }
 
     }
@@ -59,7 +69,7 @@ public class LegController : MonoBehaviour
                 if (legs[legIndex].CanStep && !legs[nextLeg].isInStep)
                 {
                     legs[legIndex].Step();
-                    lastStep = Time.time;
+                    
                     
                 }
             }
@@ -80,23 +90,43 @@ public class LegController : MonoBehaviour
         return avgHeight;
     }
 
-    private void CalulateAllTriangleNormal()
+    private bool isStationary()
     {
-        norm = Vector3.zero;
-        if(legs.Length <= 2)
+        bool result = true; 
+        foreach(ProceduralLeg leg in legs)
         {
-            return;
-        }
-        foreach (int[] tri in triangles)
-        {
-
-            if (tri.Length == 3)
+            if (leg.isInStep)
             {
-                norm += (Vector3.Cross(legs[tri[1]].footPosition - legs[tri[0]].footPosition, legs[tri[2]].footPosition - legs[tri[0]].footPosition)).normalized;
+                result = false;
             }
-
         }
-        norm /= triangles.Count;
+        return result;
+    }
+
+    private Vector3 CalulateAllTriangleNormal()
+    {
+        Vector3 norm = Vector3.zero;
+        if(legs.Length == 2)
+        {
+            Vector3 falseLeg = new Vector3(legs[0].footPosition.x + offset, Mathf.Abs((legs[1].footPosition.y - legs[0].footPosition.y)/2), legs[0].footPosition.z);
+            fake = falseLeg;
+            norm = Vector3.Cross(legs[1].footPosition - legs[0].footPosition,falseLeg- legs[0].footPosition).normalized;
+            
+        }
+        else
+        {
+            foreach (int[] tri in triangles)
+            {
+
+                if (tri.Length == 3)
+                {
+                    norm += (Vector3.Cross(legs[tri[1]].footPosition - legs[tri[0]].footPosition, legs[tri[2]].footPosition - legs[tri[0]].footPosition)).normalized;
+                }
+
+            }
+            norm /= triangles.Count;
+        }
+        return norm;
     }
 
     private float det3D(Vector3 p0, Vector3 p1, Vector3 p2)
@@ -124,6 +154,14 @@ public class LegController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(body.position, body.up);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(fake, 1f);
     }
 
 }
