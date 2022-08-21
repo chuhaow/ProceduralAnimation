@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class ProceduralLeg : MonoBehaviour
 {
+    [Header("Leg positioning")]
     [SerializeField] private Transform ikTarget;
     [SerializeField] private Transform ikPole;
+    [Tooltip("The resting position of legs in Leg space")]
     [SerializeField] private Vector3 restingPosition;
-    [SerializeField] private Vector3 worldPosition;
+    private Vector3 worldPosition;
     [SerializeField] private Transform desiredPoint;
-    [SerializeField] private float strideLength;
+    [Tooltip("The Layer that can be stepped on")]
     [SerializeField] private LayerMask solidLayer;
-    [SerializeField] private Vector3 desired;
-    [SerializeField] private float stepPercentage;
+
     private float dist;
     private bool isStepping = false;
 
     [Header("Step Modifier")]
     [SerializeField] private float stepHeight;
     [SerializeField] private float stepDur;
-    [SerializeField] private float stepOffset;
+    [SerializeField] private float strideLength;
+    [Tooltip("The Curve which the step follows")]
     [SerializeField] private AnimationCurve stepHeightCurve;
     [SerializeField] private float lastStep = 0;
-    [SerializeField] private float stepCoolDown = 0.01f;
-    public float percent
+    public float Percent
     {
         get
         {
@@ -39,7 +40,7 @@ public class ProceduralLeg : MonoBehaviour
         }
     }
 
-    public bool isInStep
+    public bool IsInStep
     {
         get
         {
@@ -47,7 +48,7 @@ public class ProceduralLeg : MonoBehaviour
         }
     }
 
-    public Vector3 footPosition
+    public Vector3 FootPosition
     {
         get
         {
@@ -64,7 +65,7 @@ public class ProceduralLeg : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        desired = desiredPoint.position;
+        
         dist = Vector3.Distance(ikTarget.position, desiredPoint.position);
         if(isStepping)
         {
@@ -104,8 +105,8 @@ public class ProceduralLeg : MonoBehaviour
     {
         isStepping = true;
         worldPosition = desiredPoint.position;
-        stepPercentage += Time.deltaTime;
-        ikTarget.position = Vector3.Lerp(ikTarget.position, worldPosition, percent) + Vector3.up * stepHeightCurve.Evaluate(percent) * stepHeight;
+        
+        ikTarget.position = Vector3.Lerp(ikTarget.position, worldPosition, Percent) + Vector3.up * stepHeightCurve.Evaluate(Percent) * stepHeight;
         if (Vector3.Distance(ikTarget.position, worldPosition) < 0.09f)
         {
             isStepping = false;

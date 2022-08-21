@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class LegController : MonoBehaviour
 {
-    private float lastStep;
     private List<int[]> triangles = new List<int[]>();
-    [SerializeField] private float startHeight;
-    [SerializeField] private float minHeight;
-    [SerializeField] private float maxHeight;
-    [SerializeField] private float currtHeight;
-    [SerializeField] private Vector3 norm1;
-    [SerializeField] private Vector3 fake;
+    private float startHeight;
+
+
+    
+    private Vector3 fake;
     [SerializeField] private Transform body;
+    [Tooltip("The offset for the fake leg used for bipeds to determine tilt")]
     [SerializeField] private float offset;
     [Header("Legs")]
     [SerializeField] private ProceduralLeg[] legs;
+    [Header("Creature Height")]
+
+    [SerializeField] private float minHeight;
+    [SerializeField] private float maxHeight;
     // Start is called before the first frame update
     void Start()
     {
         startHeight = Mathf.Abs(transform.position.y - AvgFootYPosition());
         FindAllTriangles();
-        Debug.Log(AvgFootYPosition());
 
     }
 
@@ -29,16 +31,14 @@ public class LegController : MonoBehaviour
     void Update()
     {
         MoveLegs();
-        positionBody();
-
+        PositionBody();
     }
 
    
-
-    private void positionBody()
+    private void PositionBody()
     {
         float currHeight = Mathf.Abs(transform.position.y - AvgFootYPosition());
-        currtHeight = currHeight;
+
         if(currHeight < minHeight)
         {
             Vector3 desiredBodyPosition = new Vector3(transform.position.x, transform.position.y + Mathf.Abs(startHeight - currHeight), transform.position.z);
@@ -48,10 +48,9 @@ public class LegController : MonoBehaviour
             Vector3 desiredBodyPosition = new Vector3(transform.position.x, transform.position.y - Mathf.Abs(startHeight - currHeight), transform.position.z);
             transform.position = Vector3.Lerp(transform.position, desiredBodyPosition, Time.deltaTime*2);
         }
-        if (isStationary())
+        if (IsStationary())
         {
-            Vector3 norm = CalulateAllTriangleNormal();
-            norm1 = norm;
+            Vector3 norm = CalulateBodyUp();
             Debug.DrawRay(body.position, norm * 2, Color.red);
             body.up = Vector3.Lerp(body.up,norm, Time.deltaTime * 2);
         }
@@ -66,11 +65,9 @@ public class LegController : MonoBehaviour
             {
                 int nextLeg = (legIndex + 1) % legs.Length;
                 
-                if (legs[legIndex].CanStep && !legs[nextLeg].isInStep)
+                if (legs[legIndex].CanStep && !legs[nextLeg].IsInStep)
                 {
                     legs[legIndex].Step();
-                    
-                    
                 }
             }
         }
@@ -83,19 +80,19 @@ public class LegController : MonoBehaviour
         {
             if (legs[legIndex] != null)
             {
-                avgHeight += legs[legIndex].footPosition.y;
+                avgHeight += legs[legIndex].FootPosition.y;
             }
         }
         avgHeight /= legs.Length;
         return avgHeight;
     }
 
-    private bool isStationary()
+    private bool IsStationary()
     {
         bool result = true; 
         foreach(ProceduralLeg leg in legs)
         {
-            if (leg.isInStep)
+            if (leg.IsInStep)
             {
                 result = false;
             }
@@ -103,14 +100,17 @@ public class LegController : MonoBehaviour
         return result;
     }
 
-    private Vector3 CalulateAllTriangleNormal()
+    /// <summary>
+    /// Find the Up Vector for the body
+    /// </summary>
+    private Vector3 CalulateBodyUp()
     {
         Vector3 norm = Vector3.zero;
         if(legs.Length == 2)
         {
-            Vector3 falseLeg = new Vector3(legs[0].footPosition.x + offset, Mathf.Abs((legs[1].footPosition.y - legs[0].footPosition.y)/2), legs[0].footPosition.z);
+            Vector3 falseLeg = new Vector3(legs[0].FootPosition.x + offset, Mathf.Abs((legs[1].FootPosition.y - legs[0].FootPosition.y)/2), legs[0].FootPosition.z);
             fake = falseLeg;
-            norm = Vector3.Cross(legs[1].footPosition - legs[0].footPosition,falseLeg- legs[0].footPosition).normalized;
+            norm = Vector3.Cross(legs[1].FootPosition - legs[0].FootPosition,falseLeg- legs[0].FootPosition).normalized;
             
         }
         else
@@ -120,7 +120,7 @@ public class LegController : MonoBehaviour
 
                 if (tri.Length == 3)
                 {
-                    norm += (Vector3.Cross(legs[tri[1]].footPosition - legs[tri[0]].footPosition, legs[tri[2]].footPosition - legs[tri[0]].footPosition)).normalized;
+                    norm += (Vector3.Cross(legs[tri[1]].FootPosition - legs[tri[0]].FootPosition, legs[tri[2]].FootPosition - legs[tri[0]].FootPosition)).normalized;
                 }
 
             }
@@ -138,7 +138,9 @@ public class LegController : MonoBehaviour
         return det;
     }
 
-    //Find all possible triangles formed by foot position
+    /// <summary>
+    /// Find all possible Triangles that can be formed by feet positions
+    /// </summary>
     private void FindAllTriangles()
     {
         for(int i = 0; i < legs.Length; i++)
@@ -147,7 +149,7 @@ public class LegController : MonoBehaviour
             {
                 for(int k = j + 1; k < legs.Length; k++)
                 {
-                    if(det3D(legs[i].footPosition, legs[j].footPosition, legs[k].footPosition) != 0)
+                    if(det3D(legs[i].FootPosition, legs[j].FootPosition, legs[k].FootPosition) != 0)
                     {
                         triangles.Add(new int[]{ i, j, k });
                     }
@@ -160,8 +162,12 @@ public class LegController : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawLine(body.position, body.up);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(fake, 1f);
+        if(legs.Length > 2)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(fake, 1f);
+        }
+        
     }
 
 }

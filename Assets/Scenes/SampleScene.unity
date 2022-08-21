@@ -612,17 +612,13 @@ MonoBehaviour:
   ikTarget: {fileID: 1918060255}
   ikPole: {fileID: 1131254980}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
-  worldPosition: {x: 0, y: 0, z: 0}
   desiredPoint: {fileID: 914224167}
-  strideLength: 1
   solidLayer:
     serializedVersion: 2
     m_Bits: 256
-  desired: {x: 0, y: 0, z: 0}
-  stepPercentage: 0
   stepHeight: 0.2
   stepDur: 0.5
-  stepOffset: 0
+  strideLength: 1
   stepHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -657,7 +653,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lastStep: 0
-  stepCoolDown: 0.01
 --- !u!1 &173590058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,17 +1005,13 @@ MonoBehaviour:
   ikTarget: {fileID: 506004531}
   ikPole: {fileID: 381412578}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
-  worldPosition: {x: 0, y: 0, z: 0}
   desiredPoint: {fileID: 555654787}
-  strideLength: 1
   solidLayer:
     serializedVersion: 2
     m_Bits: 256
-  desired: {x: 0, y: 0, z: 0}
-  stepPercentage: 0
   stepHeight: 0.5
   stepDur: 0.5
-  stepOffset: 0
+  strideLength: 1
   stepHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -1055,7 +1046,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lastStep: 0
-  stepCoolDown: 0.01
 --- !u!4 &317266411 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
@@ -1867,17 +1857,13 @@ MonoBehaviour:
   ikTarget: {fileID: 826041044}
   ikPole: {fileID: 998491457}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
-  worldPosition: {x: 0, y: 0, z: 0}
   desiredPoint: {fileID: 1742588018}
-  strideLength: 1
   solidLayer:
     serializedVersion: 2
     m_Bits: 256
-  desired: {x: 0, y: 0, z: 0}
-  stepPercentage: 0
   stepHeight: 0.2
   stepDur: 0.5
-  stepOffset: 0
+  strideLength: 1
   stepHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -1912,7 +1898,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lastStep: 0
-  stepCoolDown: 0.01
 --- !u!1 &506004530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,17 +2013,13 @@ MonoBehaviour:
   ikTarget: {fileID: 1102823658}
   ikPole: {fileID: 1150886193}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
-  worldPosition: {x: 0, y: 0, z: 0}
   desiredPoint: {fileID: 486040614}
-  strideLength: 0.9
   solidLayer:
     serializedVersion: 2
     m_Bits: 256
-  desired: {x: 0, y: 0, z: 0}
-  stepPercentage: 0
   stepHeight: 0.5
   stepDur: 0.5
-  stepOffset: 0
+  strideLength: 0.9
   stepHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -2073,7 +2054,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lastStep: 0
-  stepCoolDown: 0.01
 --- !u!4 &525514954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
@@ -2385,17 +2365,13 @@ MonoBehaviour:
   ikTarget: {fileID: 1178897407}
   ikPole: {fileID: 1941971854}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
-  worldPosition: {x: 0, y: 0, z: 0}
   desiredPoint: {fileID: 1018479892}
-  strideLength: 0.9
   solidLayer:
     serializedVersion: 2
     m_Bits: 256
-  desired: {x: 0, y: 0, z: 0}
-  stepPercentage: 0
   stepHeight: 0.2
   stepDur: 0.5
-  stepOffset: 0
+  strideLength: 0.9
   stepHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -2430,7 +2406,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lastStep: 0
-  stepCoolDown: 0.01
 --- !u!1001 &677504733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3431,17 +3406,13 @@ MonoBehaviour:
   ikTarget: {fileID: 1264765601}
   ikPole: {fileID: 1533080555}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
-  worldPosition: {x: 0, y: 0, z: 0}
   desiredPoint: {fileID: 2003785608}
-  strideLength: 1
   solidLayer:
     serializedVersion: 2
     m_Bits: 256
-  desired: {x: 0, y: 0, z: 0}
-  stepPercentage: 0
   stepHeight: 0.5
   stepDur: 0.5
-  stepOffset: 0
+  strideLength: 1
   stepHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -3476,7 +3447,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lastStep: 0
-  stepCoolDown: 0.01
 --- !u!4 &944628347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
@@ -5311,17 +5281,13 @@ MonoBehaviour:
   ikTarget: {fileID: 985864423}
   ikPole: {fileID: 665444064}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
-  worldPosition: {x: 0, y: 0, z: 0}
   desiredPoint: {fileID: 1454871571}
-  strideLength: 0.9
   solidLayer:
     serializedVersion: 2
     m_Bits: 256
-  desired: {x: 0, y: 0, z: 0}
-  stepPercentage: 0
   stepHeight: 0.5
   stepDur: 0.5
-  stepOffset: 0
+  strideLength: 0.9
   stepHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -5356,7 +5322,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lastStep: 0
-  stepCoolDown: 0.01
 --- !u!4 &1231535212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
@@ -5835,17 +5800,13 @@ MonoBehaviour:
   ikTarget: {fileID: 1534920109}
   ikPole: {fileID: 946159987}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
-  worldPosition: {x: 0, y: 0, z: 0}
   desiredPoint: {fileID: 129560361}
-  strideLength: 0.9
   solidLayer:
     serializedVersion: 2
     m_Bits: 256
-  desired: {x: 0, y: 0, z: 0}
-  stepPercentage: 0
   stepHeight: 0.5
   stepDur: 0.5
-  stepOffset: 0
+  strideLength: 0.9
   stepHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -5880,7 +5841,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lastStep: 0
-  stepCoolDown: 0.01
 --- !u!4 &1476585162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
@@ -5916,18 +5876,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfda2eccc0920f488adcb0802b17dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHeight: 0
-  minHeight: 1
-  maxHeight: 2
-  currtHeight: 0
-  norm1: {x: 0, y: 0, z: 0}
-  fake: {x: 0, y: 0, z: 0}
   body: {fileID: 1600094257}
   offset: 0
   legs:
   - {fileID: 1231535211}
   - {fileID: 317266410}
   - {fileID: 525514953}
+  minHeight: 1
+  maxHeight: 2
 --- !u!54 &1478330310
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6027,12 +5983,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfda2eccc0920f488adcb0802b17dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHeight: 0
-  minHeight: 1
-  maxHeight: 2
-  currtHeight: 0
-  norm1: {x: 0, y: 0, z: 0}
-  fake: {x: 0, y: 0, z: 0}
   body: {fileID: 295115900}
   offset: 0
   legs:
@@ -6040,6 +5990,8 @@ MonoBehaviour:
   - {fileID: 494279592}
   - {fileID: 675038883}
   - {fileID: 156810560}
+  minHeight: 1
+  maxHeight: 2
 --- !u!1 &1514481515 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5506977543257564031, guid: 23c8af5843f7d6d41a5a53547be8fe72, type: 3}
@@ -6531,17 +6483,13 @@ MonoBehaviour:
   ikTarget: {fileID: 112547209}
   ikPole: {fileID: 1258595743}
   restingPosition: {x: 2.090002, y: -12.7, z: 14.7}
-  worldPosition: {x: 0, y: 0, z: 0}
   desiredPoint: {fileID: 1050141268}
-  strideLength: 0.9
   solidLayer:
     serializedVersion: 2
     m_Bits: 256
-  desired: {x: 0, y: 0, z: 0}
-  stepPercentage: 0
   stepHeight: 0.2
   stepDur: 0.5
-  stepOffset: 0
+  strideLength: 0.9
   stepHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -6576,7 +6524,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   lastStep: 0
-  stepCoolDown: 0.01
 --- !u!1 &1726721303
 GameObject:
   m_ObjectHideFlags: 0
@@ -8394,17 +8341,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfda2eccc0920f488adcb0802b17dea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHeight: 0
-  minHeight: 0.5
-  maxHeight: 2
-  currtHeight: 0
-  norm1: {x: 0, y: 0, z: 0}
-  fake: {x: 0, y: 0, z: 0}
   body: {fileID: 329759382}
   offset: -110
   legs:
   - {fileID: 1476585161}
   - {fileID: 944628346}
+  minHeight: 0.5
+  maxHeight: 2
 --- !u!4 &2111995313
 Transform:
   m_ObjectHideFlags: 0
