@@ -71,7 +71,6 @@ public class ProceduralLeg : MonoBehaviour
         {
             
             Step();
-            Debug.Log("We are Stepping");
         }
         else if(!isStepping)
         {
