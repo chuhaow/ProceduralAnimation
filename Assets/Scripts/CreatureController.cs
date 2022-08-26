@@ -65,12 +65,25 @@ public class CreatureController : MonoBehaviour
             {
                 int nextLeg = (legIndex + 1) % legs.Length;
                 
-                if (legs[legIndex].CanStep && !legs[nextLeg].IsInStep)
+                if (legs[legIndex].CanStep && AreOtherLegsGrounded(legIndex))
                 {
                     legs[legIndex].Step();
                 }
             }
         }
+    }
+
+    private bool AreOtherLegsGrounded(int currentLegIndex)
+    {
+        bool AreOtherLegsGrounded = true;
+        for (int i = currentLegIndex + 1; i % legs.Length != currentLegIndex; i++)
+        {
+            if (legs[i % legs.Length].IsInStep)
+            {
+                AreOtherLegsGrounded = false;
+            }
+        }
+        return AreOtherLegsGrounded;
     }
 
     private float AvgFootYPosition()

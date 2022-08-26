@@ -20,6 +20,7 @@ public class ProceduralLeg : MonoBehaviour
     [Header("Step Modifier")]
     [SerializeField] private float stepHeight;
     [SerializeField] private float stepDur;
+    [SerializeField] private float stepCoolDown;
     [SerializeField] private float strideLength;
     [Tooltip("The Curve which the step follows")]
     [SerializeField] private AnimationCurve stepHeightCurve;
@@ -67,7 +68,7 @@ public class ProceduralLeg : MonoBehaviour
     {
         
         dist = Vector3.Distance(ikTarget.position, desiredPoint.position);
-        if(isStepping)
+        if(isStepping && Time.time - lastStep >= stepCoolDown)
         {
             
             Step();
